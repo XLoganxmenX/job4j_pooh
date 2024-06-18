@@ -28,12 +28,9 @@ public class TopicSchema implements Schema {
     public void run() {
         while (!Thread.currentThread().isInterrupted()) {
             for (var queueKey : receivers.keySet()) {
-
                 var queue = data.getOrDefault(queueKey, new LinkedBlockingQueue<>());
                 var receiversByQueue = receivers.get(queueKey);
                 var it = receiversByQueue.iterator();
-
-
                 while (it.hasNext()) {
                     Receiver receiver = it.next();
                     for (String data : queue) {
@@ -43,7 +40,6 @@ public class TopicSchema implements Schema {
                         if (data == null) {
                             break;
                         }
-
                     }
                     if (!it.hasNext()) {
                         it = receiversByQueue.iterator();
